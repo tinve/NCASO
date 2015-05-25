@@ -7,8 +7,6 @@ __author__ = 'galina'
 
 
 class TestLattice(TestCase):
-    # def test_deltaE(self):
-    #   self.fail()
 
     def test_sum_neighbors_1D(self):
         n = 100
@@ -166,7 +164,44 @@ class TestLattice(TestCase):
             dM_bruteforce = -2 * lattice.state[i]
             self.assertEqual(dM_bruteforce, dM)
 
+    def test_deltaE_1D(self):
+        n = 100
+        m = 1
+        D = 1
+        J = 1
+        T = 1
+        lattice = Lattice_class.Lattice(n, m, D, J, T)
 
+        for i in range(n * m):
+            dE = lattice.deltaE(i)
+            dE_bruteforce = J * lattice.state[i] * sum(lattice.state[n] for n in lattice.neighbors[i])
+            self.assertEqual(dE_bruteforce, dE)
+
+    def test_deltaE_1_5D(self):
+        n = 50
+        m = 2
+        D = 1.5
+        J = 1
+        T = 1
+        lattice = Lattice_class.Lattice(n, m, D, J, T)
+
+        for i in range(n * m):
+            dE = lattice.deltaE(i)
+            dE_bruteforce = J * lattice.state[i] * sum(lattice.state[n] for n in lattice.neighbors[i])
+            self.assertEqual(dE_bruteforce, dE)
+
+    def test_deltaE_2D(self):
+        n = 10
+        m = 10
+        D = 2
+        J = 1
+        T = 1
+        lattice = Lattice_class.Lattice(n, m, D, J, T)
+
+        for i in range(n * m):
+            dE = lattice.deltaE(i)
+            dE_bruteforce = J * lattice.state[i] * sum(lattice.state[n] for n in lattice.neighbors[i])
+            self.assertEqual(dE_bruteforce, dE)
 #
 # def test_update(self):
 #   self.fail()
