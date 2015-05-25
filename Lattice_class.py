@@ -9,58 +9,54 @@ class Lattice:
         self.size = n * m
         self.state = [2 * randint(0, 1) - 1 for i in range(n * m)]
 
-        self.n = n
-        self.m = m
         self.D = D
         self.J = J
         self.T = T
 
         if D == 1 and m == 1:
-            self.neighbor = {}
+            self.neighbors = {}
+            self.coord = 2
 
             for i in range(n):
-                self.neighbor[i] = [(i - 1) % n,
-                                    (i + 1) % n]
+                self.neighbors[i] = [(i - 1) % n,
+                                     (i + 1) % n]
 
         if D == 1.5 and m == 2:
-            self.neighbor = {}
+            self.neighbors = {}
+            self.coord = 3
 
             for i in range(n):
-                self.neighbor[i] = [(i - 1) % n,
-                                    (i + 1) % n,
-                                    (i + n) % (2 * n)]
+                self.neighbors[i] = [(i - 1) % n,
+                                     (i + 1) % n,
+                                     (i + n) % (2 * n)]
             for i in range(n, 2 * n):
-                self.neighbor[i] = [(i - 1) % n + n,
-                                    (i + 1) % n + n,
-                                    (i + n) % (2 * n)]
+                self.neighbors[i] = [(i - 1) % n + n,
+                                     (i + 1) % n + n,
+                                     (i + n) % (2 * n)]
 
         if D == 2:
-            self.neighbor = {}
+            self.neighbors = {}
+            self.coord = 4
 
             for i in range(m):
                 for j in range(n):
-                    self.neighbor[i * n + j] = [(i * n + j - 1) % n + i * n,
-                                                (i * n + j + 1) % n + i * n,
-                                                (i * n + j - n) % (n * m),
-                                                (i * n + j + n) % (n * m)]
+                    self.neighbors[i * n + j] = [(i * n + j - 1) % n + i * n,
+                                                 (i * n + j + 1) % n + i * n,
+                                                 (i * n + j - n) % (n * m),
+                                                 (i * n + j + n) % (n * m)]
 
     def sum_neighbors(self, i):
-        return sum(self.state[n] for n in self.neighbor[i])
+        return sum(self.state[n] for n in self.neighbors[i])
 
     def deltaE(self, i):
-        Ei = 0
-        Ef = 0
-        for n in self.neighbor[i]:  # returns indices of all neighbours of ith element of a
-            Ei += self.J * self.state[i] * self.state[n] / self.size
-        for n in self.neighbor[i]:  # returns indices of all neighbours of ith element of a
-            Ef += self.J * self.state[i] * self.state[n] / self.size
-        return Ef - Ei
+        n = self.sum_neighbors(self, i)
+        return - 2 * self.J * self.state[i] * n
 
     def energy(self):
         E = 0
-        for i in range(self.size):
-            for n in self.neighbor[i]:  # returns indices of all neighbours of ith element of a
-                E += self.J * self.state[i] * self.state[n] / self.size
+        for i, s in enumerate(self.state):
+             n = self.sum_neighbors(self, i)
+             E += self.J * s * n
         return E
 
     def deltaM(self, i):
