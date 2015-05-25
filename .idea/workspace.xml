@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee56e4b5-e032-4ad7-afb4-ae9b13655500" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lattice_class.py" afterPath="$PROJECT_DIR$/Lattice_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_lattice.py" afterPath="$PROJECT_DIR$/tests/test_lattice.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NCASO.iws" />
@@ -431,12 +429,18 @@
       <option name="project" value="LOCAL" />
       <updated>1432595317259</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Test for sum_neighbors of 1D, 1.5D, 2D lattices implemented.">
+      <created>1432596140934</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1432596140934</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="61" y="24" width="1539" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
