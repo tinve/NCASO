@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee56e4b5-e032-4ad7-afb4-ae9b13655500" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lattice_class.py" afterPath="$PROJECT_DIR$/Lattice_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_lattice.py" afterPath="$PROJECT_DIR$/tests/test_lattice.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NCASO.iws" />
@@ -27,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/Lattice_class.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
+              <caret line="62" column="15" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -38,15 +40,21 @@
       <file leaf-file-name="test_lattice.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test_lattice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35104364">
-              <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.65844405">
+              <caret line="155" column="29" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
-                <element signature="e#230#562#0" expanded="false" />
-                <element signature="e#612#945#0" expanded="false" />
-                <element signature="e#993#1323#0" expanded="false" />
-                <element signature="e#1364#1738#0" expanded="false" />
-                <element signature="e#1780#2155#0" expanded="false" />
+                <element signature="e#611#944#0" expanded="false" />
+                <element signature="e#991#1321#0" expanded="false" />
+                <element signature="e#1361#1735#0" expanded="false" />
+                <element signature="e#1777#2152#0" expanded="false" />
+                <element signature="e#2192#2566#0" expanded="false" />
+                <element signature="e#2613#2900#0" expanded="false" />
+                <element signature="e#2949#3237#0" expanded="false" />
+                <element signature="e#3284#3571#0" expanded="false" />
+                <element signature="e#3611#3894#0" expanded="false" />
+                <element signature="e#3936#4218#0" expanded="false" />
+                <element signature="e#4258#4544#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -56,7 +64,7 @@
         <entry file="file://$PROJECT_DIR$/Monte_Carlo.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="49" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="49" />
+              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
               <folding>
                 <element signature="e#23#43#0" expanded="true" />
               </folding>
@@ -153,7 +161,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test_lattice">
+  <component name="RunManager" selected="Python tests.Unittest TestLattice.test_deltaM_1D">
     <configuration default="false" name="Monte Carlo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -172,25 +180,6 @@
       <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="plots" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="NCASO" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plots.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
@@ -248,6 +237,28 @@
       <option name="METHOD_NAME" value="" />
       <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittest TestLattice.test_deltaM_1D" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="NCASO" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_lattice.py" />
+      <option name="CLASS_NAME" value="TestLattice" />
+      <option name="METHOD_NAME" value="test_deltaM_1D" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
       <option name="PUREUNITTEST" value="true" />
@@ -379,18 +390,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.Monte Carlo" />
-      <item index="1" class="java.lang.String" itemvalue="Python.plots" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Monte_Carlo" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestLattice.test_update" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_lattice" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Monte_Carlo" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest TestLattice.test_update" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_lattice" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestLattice.test_deltaM_1D" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_lattice" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest TestLattice.test_update" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Monte_Carlo" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Monte Carlo" />
-        <item index="4" class="java.lang.String" itemvalue="Python.plots" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittest TestLattice.test_deltaM_1D" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Monte_Carlo" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test_lattice" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestLattice.test_update" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Monte Carlo" />
       </list>
     </recent_temporary>
   </component>
@@ -435,12 +446,24 @@
       <option name="project" value="LOCAL" />
       <updated>1432596140934</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Test for energy of 1D, 1.5D, 2D lattices implemented.">
+      <created>1432596159689</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1432596159689</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Test for magnetization of 1D, 1.5D, 2D lattices implemented.">
+      <created>1432596377478</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1432596377478</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="61" y="24" width="1539" height="876" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -450,7 +473,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14424951" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39950064" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30461922" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30461922" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -479,11 +502,13 @@
     <MESSAGE value="Version 1.0" />
     <MESSAGE value="Test for sum_neighbors of 1D lattice implemented." />
     <MESSAGE value="Test for sum_neighbors of 1D, 1.5D, 2D lattices implemented." />
-    <option name="LAST_COMMIT_MESSAGE" value="Test for sum_neighbors of 1D, 1.5D, 2D lattices implemented." />
+    <MESSAGE value="Test for energy of 1D, 1.5D, 2D lattices implemented." />
+    <MESSAGE value="Test for magnetization of 1D, 1.5D, 2D lattices implemented." />
+    <option name="LAST_COMMIT_MESSAGE" value="Test for magnetization of 1D, 1.5D, 2D lattices implemented." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -504,11 +529,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
-            <element signature="e#230#562#0" expanded="false" />
-            <element signature="e#612#945#0" expanded="false" />
-            <element signature="e#993#1323#0" expanded="false" />
-            <element signature="e#1364#1738#0" expanded="false" />
-            <element signature="e#1780#2155#0" expanded="false" />
+            <element signature="e#611#944#0" expanded="false" />
+            <element signature="e#991#1321#0" expanded="false" />
+            <element signature="e#1361#1735#0" expanded="false" />
+            <element signature="e#1777#2152#0" expanded="false" />
+            <element signature="e#2192#2566#0" expanded="false" />
+            <element signature="e#2613#2900#0" expanded="false" />
+            <element signature="e#2949#3237#0" expanded="false" />
+            <element signature="e#3284#3571#0" expanded="false" />
+            <element signature="e#3611#3894#0" expanded="false" />
+            <element signature="e#3936#4218#0" expanded="false" />
+            <element signature="e#4258#4544#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -537,37 +568,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Monte_Carlo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="49" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="49" />
-          <folding>
-            <element signature="e#23#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lattice_class.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
+          <caret line="62" column="15" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Monte_Carlo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+          <folding>
+            <element signature="e#23#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_lattice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35104364">
-          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.65844405">
+          <caret line="155" column="29" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
-            <element signature="e#230#562#0" expanded="false" />
-            <element signature="e#612#945#0" expanded="false" />
-            <element signature="e#993#1323#0" expanded="false" />
-            <element signature="e#1364#1738#0" expanded="false" />
-            <element signature="e#1780#2155#0" expanded="false" />
+            <element signature="e#611#944#0" expanded="false" />
+            <element signature="e#991#1321#0" expanded="false" />
+            <element signature="e#1361#1735#0" expanded="false" />
+            <element signature="e#1777#2152#0" expanded="false" />
+            <element signature="e#2192#2566#0" expanded="false" />
+            <element signature="e#2613#2900#0" expanded="false" />
+            <element signature="e#2949#3237#0" expanded="false" />
+            <element signature="e#3284#3571#0" expanded="false" />
+            <element signature="e#3611#3894#0" expanded="false" />
+            <element signature="e#3936#4218#0" expanded="false" />
+            <element signature="e#4258#4544#0" expanded="false" />
           </folding>
         </state>
       </provider>

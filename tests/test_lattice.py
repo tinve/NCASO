@@ -127,11 +127,46 @@ class TestLattice(TestCase):
         magnetization_bruteforce = sum(lattice.state)
         self.assertEqual(magnetization_bruteforce, magnetization)
 
-# def test_deltaM(self):
-#   self.fail()
-#
-# def test_magnetization(self):
-#   self.fail()
+    def test_deltaM_1D(self):
+        n = 100
+        m = 1
+        D = 1
+        J = 1
+        T = 1
+        lattice = Lattice_class.Lattice(n, m, D, J, T)
+
+        for i in range(n * m):
+            dM = lattice.deltaM(i)
+            dM_bruteforce = -2 * lattice.state[i]
+            self.assertEqual(dM_bruteforce, dM)
+
+    def test_deltaM_1_5D(self):
+        n = 50
+        m = 2
+        D = 1
+        J = 1
+        T = 1
+        lattice = Lattice_class.Lattice(n, m, D, J, T)
+
+        for i in range(n * m):
+            dM = lattice.deltaM(i)
+            dM_bruteforce = -2 * lattice.state[i]
+            self.assertEqual(dM_bruteforce, dM)
+
+    def test_deltaM_2D(self):
+        n = 10
+        m = 10
+        D = 2
+        J = 1
+        T = 1
+        lattice = Lattice_class.Lattice(n, m, D, J, T)
+
+        for i in range(n * m):
+            dM = lattice.deltaM(i)
+            dM_bruteforce = -2 * lattice.state[i]
+            self.assertEqual(dM_bruteforce, dM)
+
+
 #
 # def test_update(self):
 #   self.fail()
