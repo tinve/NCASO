@@ -50,13 +50,13 @@ class Lattice:
 
     def deltaE(self, i):
         n = self.sum_neighbors(i)
-        return - 2 * self.J * self.state[i] * n
+        return - self.J * self.state[i] * n
 
     def energy(self):
         E = 0
         for i, s in enumerate(self.state):
              n = self.sum_neighbors(i)
-             E += self.J * s * n
+             E += - 0.5 * self.J * s * n
         return E
 
     def deltaM(self, i):

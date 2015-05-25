@@ -41,8 +41,8 @@ for T in np.arange(Tmin, Tmax, dT):
     lattice = Lattice_class.Lattice(n, m, D, J, T)
 
     flip = ''
-    energy = 0
-    magnetization = 0
+    energy = []
+    magnetization = []
 
     for step in range(steps_skip):
         i = randint(0, size - 1)    # spin to flip
@@ -54,18 +54,18 @@ for T in np.arange(Tmin, Tmax, dT):
     for step in range(steps_measure):
         i = randint(0, size - 1)    # spin to flip
         dE = lattice.deltaE(i)
-        f = lattice.update(i,dE)   # 1 if the spin flips, 0 if stays in the same state
+        f = lattice.update(i, dE)   # 1 if the spin flips, 0 if stays in the same state
 
         E += f * dE
         M += f * lattice.deltaM(i)
 
-        energy += E
-        magnetization += M
+        energy.append[E]
+        magnetization.append[M]
         flip += str(f)
 
     temperatures.append(T)
-    energies.append(energy / steps_measure / size )
-    magnetizations.append(magnetization / steps_measure / size)
+    energies.append(np.mean(energy) / size)
+    magnetizations.append(np.mean(magnetization) / size)
     flips.append(flip)
 
 print temperatures
