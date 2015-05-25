@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee56e4b5-e032-4ad7-afb4-ae9b13655500" name="Default" comment="Version 1.0">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lattice_class.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Monte_Carlo.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_lattice.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Monte Carlo simulation.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Monte Carlo.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="ee56e4b5-e032-4ad7-afb4-ae9b13655500" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lattice_class.py" afterPath="$PROJECT_DIR$/Lattice_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_lattice.py" afterPath="$PROJECT_DIR$/tests/test_lattice.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NCASO.iws" />
@@ -31,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Lattice_class.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Lattice_class.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lattice_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39848197">
-              <caret line="47" column="55" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -43,13 +37,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_lattice.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_lattice.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test_lattice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.35104364">
+              <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#230#562#0" expanded="false" />
+                <element signature="e#612#945#0" expanded="false" />
+                <element signature="e#993#1323#0" expanded="false" />
+                <element signature="e#1364#1738#0" expanded="false" />
+                <element signature="e#1780#2155#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -85,8 +84,8 @@
         <option value="$PROJECT_DIR$/plots.py" />
         <option value="$PROJECT_DIR$/Monte Carlo.py" />
         <option value="$PROJECT_DIR$/Monte_Carlo.py" />
-        <option value="$PROJECT_DIR$/tests/test_lattice.py" />
         <option value="$PROJECT_DIR$/Lattice_class.py" />
+        <option value="$PROJECT_DIR$/tests/test_lattice.py" />
       </list>
     </option>
   </component>
@@ -420,13 +419,26 @@
       <option name="project" value="LOCAL" />
       <updated>1430667377148</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Test for sum_neighbors of 1D lattice implemented.">
+      <created>1432593985768</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1432593985768</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Test for sum_neighbors of 1D, 1.5D, 2D lattices implemented.">
+      <created>1432595317259</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1432595317259</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="61" y="24" width="1539" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -443,7 +455,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -462,7 +473,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Version 1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 1.0" />
+    <MESSAGE value="Test for sum_neighbors of 1D lattice implemented." />
+    <MESSAGE value="Test for sum_neighbors of 1D, 1.5D, 2D lattices implemented." />
+    <option name="LAST_COMMIT_MESSAGE" value="Test for sum_neighbors of 1D, 1.5D, 2D lattices implemented." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -487,6 +500,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#230#562#0" expanded="false" />
+            <element signature="e#612#945#0" expanded="false" />
+            <element signature="e#993#1323#0" expanded="false" />
+            <element signature="e#1364#1738#0" expanded="false" />
+            <element signature="e#1780#2155#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -525,22 +543,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_lattice.py">
+    <entry file="file://$PROJECT_DIR$/Lattice_class.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lattice_class.py">
+    <entry file="file://$PROJECT_DIR$/tests/test_lattice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39848197">
-          <caret line="47" column="55" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.35104364">
+          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#230#562#0" expanded="false" />
+            <element signature="e#612#945#0" expanded="false" />
+            <element signature="e#993#1323#0" expanded="false" />
+            <element signature="e#1364#1738#0" expanded="false" />
+            <element signature="e#1780#2155#0" expanded="false" />
           </folding>
         </state>
       </provider>

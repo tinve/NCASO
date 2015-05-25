@@ -55,7 +55,7 @@ class Lattice:
     def energy(self):
         E = 0
         for i, s in enumerate(self.state):
-             n = self.sum_neighbors(self, i)
+             n = self.sum_neighbors(i)
              E += self.J * s * n
         return E
 
