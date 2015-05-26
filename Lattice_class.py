@@ -50,7 +50,7 @@ class Lattice:
 
     def deltaE(self, i):
         n = self.sum_neighbors(i)
-        return - self.J * self.state[i] * n
+        return 2 * self.J * self.state[i] * n
 
     def energy(self):
         E = 0
@@ -60,7 +60,7 @@ class Lattice:
         return E
 
     def deltaM(self, i):
-        return  - 2 * self.state[i]
+        return - 2 * self.state[i]
 
     def magnetization(self):
         return sum(self.state)
