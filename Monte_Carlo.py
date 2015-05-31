@@ -2,84 +2,124 @@ __author__ = 'galina'
 
 import Lattice_class
 import numpy as np
+import pandas as pd
+import matplotlib as plt
+import os.path
 from random import randint
 from random import seed
 
-n = 10
-m = 1
-D = 1  # can be 1, 1.5 (ladder) or 2
+n1 = 20
+n2 = 20
+n3 = 1
+D = 2  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
 
 J = 1
 
-Tmin = 0.01
-Tmax = 4.0
-dT = 0.2
+Tmin = 1.5
+Tmax = 3.0
+dT = 0.1
 
-size = n*m
+size = n1 * n2 * n3
 
-steps_skip = 1000 * size
-steps_measure = 5000 * size
+steps_skip = 5000 * size
+steps_measure = 10000 * size
 
-def filename(n, m, D):
-    if D == 1 and m == 1:
-        fname = '1D, ' + str(n) + ' spins'
-    elif D == 1.5 and m == 2:
-        fname = '1,5D, ' + str(n) + 'x2 spins'
-    elif D == 2:
-        fname = '2D, ' + str(n) + 'x' + str(m) + ' spins'
-    else:
-        raise ValueError('Wrong dimensions')
-    return fname
+assert((D == 1   and n2 == 1 and n3 == 1) or
+       (D == 1.5 and n2 == 2 and n3 == 1) or
+       (D == 2   and n3 == 1) or
+       (D == 2.5 and n3 == 2))
 
-temperatures = []
-energies = []
-magnetizations = []
-flips = []
+# fname_base = str(D) + 'D, ' + str(n1) + 'x' + str(n2) + 'x' + str(n3) + ' spins'
 
-for T in np.arange(Tmin, Tmax, dT):
-    lattice = Lattice_class.Lattice(n, m, D, J, T)
+T_list = []
+E_list = []
+M_list = []
+C_list = []
+B_list = []
+flip_list = []
 
+for T in np.arange(Tmin, Tmax + dT, dT):
+
+    lattice = Lattice_class.Lattice(n1, n2, n3, D, J, T)
+
+    E = []
+    M = []
     flip = []
-    energy = []
-    magnetization = []
 
     for step in range(steps_skip):
         i = randint(0, size - 1)    # spin to flip
         lattice.update(i, lattice.deltaE(i))
 
-    E = lattice.energy()
-    M = lattice.magnetization()
+    e = lattice.energy()
+    m = lattice.magnetization()
 
     for step in range(steps_measure):
         i = randint(0, size - 1)    # spin to flip
-        dE = lattice.deltaE(i)
-        dM = lattice.deltaM(i)
+        de = lattice.deltaE(i)
+        dm = lattice.deltaM(i)
 
-        f = lattice.update(i, dE)   # 1 if the spin flips, 0 if stays in the same state
+        f = lattice.update(i, de)   # 1 if the spin flips, 0 if stays in the same state
 
-        E += f * dE
-        M += f * dM
+        e += f * de
+        m += f * dm
 
-        energy += [E]
-        magnetization += [M]
+        E += [e]
+        M += [m]
         flip += [f]
 
-    #     print step, E, lattice.energy(), dE, f, lattice.state
+
+    assert(lattice.energy() == e)
+    assert(lattice.magnetization() == m)
+
+    temperature = T
+
+    M2 = list(np.array(M)**2)
+    M4 = list(np.array(M)**4)
+
+    energy = np.mean(E) / size
+    magnetization = abs(np.mean(M) / size)
+
+    thermal_capacity = (np.var(E) / T**2) / size**2
+    binder_cumulant = ( 1 - np.mean(M4) / (3 * np.mean(M2)**2) )
+
+    flip = ''.join(str(f) for f in flip)
+
+    # fname = fname_base + ', T = ' + "%0.2f" % T + '.txt'
     #
-    # print T,
-    # print lattice.state
-    # print 'E', E, lattice.energy()
-    # print 'M', M, lattice.magnetization()
+    # if os.path.exists(fname):
+    #     print 'File already exist'
+    #
+    # f = open(fname, 'w')
+    # f.write('T ' + str(temperature) + '\n' +
+    #         'E ' + str(energy) + '\n' +
+    #         'M ' + str(magnetization) + '\n' +
+    #         'C ' + str(thermal_capacity) + '\n' +
+    #         'B ' + str(binder_cumulant) + '\n' +
+    #         'flips ' + flip)
+    #
+    # f.close()
 
+    T_list += [T]
+    E_list += [energy]
+    M_list += [magnetization]
+    C_list += [thermal_capacity]
+    B_list += [binder_cumulant]
+    flip_list += [flip[-10000 : ]]
 
-    assert(lattice.energy() == E)
-    assert(lattice.magnetization() == M)
+lattice_type = [str(D) + 'D, ' + str(n1) + 'x' + str(n2) + 'x' + str(n3) + ' spins']*len(T_list)
 
-    temperatures += [T]
-    energies += [np.mean(energy) / size]
-    magnetizations += [np.mean(magnetization) / size]
-    flips += [flip]
+records = pd.DataFrame({'type'  : lattice_type,
+                        'T'     : T_list,
+                        'E'     : E_list,
+                        'M'     : M_list,
+                        'C'     : C_list,
+                        'B'     : B_list,
+                        'flips' : flip_list})
 
-print temperatures
-print energies
-print magnetizations
+fname = str(D) + 'D, T from ' + str(Tmin) + ' to ' + str(Tmax) + '.csv'
+
+if not os.path.exists(fname):
+#     print 'File already exist'
+    records.to_csv(fname)
+else:
+    records.to_csv(fname, mode = 'a', header = False)
