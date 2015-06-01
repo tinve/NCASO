@@ -28,8 +28,8 @@ T_list = list(np.arange(Tmin, Tmax + dT, dT)) + large_T
 
 size = n1 * n2 * n3
 
-steps_skip = 5000 * size
-steps_measure = 10000 * size
+steps_skip = 500 * size
+steps_measure = 1000 * size
 
 assert((D == 1   and n2 == 1 and n3 == 1) or
        (D == 1.5 and n2 == 2 and n3 == 1) or
