@@ -11,29 +11,35 @@ import datetime
 from eventlet.timeout import Timeout
 import timeout_decorator
 
-fname = '2D, T from 1.5 to 3.0.csv'
+fname = '2D, T from 1.0 to 4.0.csv'
 
-@timeout_decorator.timeout(5)
+@timeout_decorator.timeout(10)
 def excess_entropy(machine):
     return machine.excess_entropy()
 
+def nan_count(a):
+    return sum(np.isnan(x) for x in a)
 
-def sample_entropies(flips, num_sequence):
+def drop_nans(a):
+    return [x for x in a if not np.isnan(x)]
+
+def sample_entropies(flips, sequence_number, total):
 
     # takes modelset and symbol string, generates posterior distribution
     # and returns list of hmu, Cmu and E, sampled over the posterior
 
     modelset = bayesem.LibraryGenerator(2, [1, 2, 3, 4])
-    num_samples = 1000
+    num_samples = 5000
 
     posterior = bayesem.ModelComparisonEM(modelset, flips, beta = 4.0, verbose = True)
+    print 'Posterior inferred.'
 
     hmu_list = []
     Cmu_list = []
     E_list = []
 
     for n in range(num_samples):
-        seed(1)
+
         (node, machine) = posterior.generate_sample()
 
         hmu = machine.entropy_rate()
@@ -56,22 +62,20 @@ def sample_entropies(flips, num_sequence):
         try:
             E = excess_entropy(machine)
         except timeout_decorator.timeout_decorator.TimeoutError:
-            E = E_list[-1]
+            E = np.nan
 
         E_list += [E]
     #        print hmu, Cmu, E
 
-        print 'sequence ' + str(num_sequence) ', sample ' + str(n)
+        print 'sequence ' + str(sequence_number) + ' of ' + str(total) + ', sample ' + str(n)
 
     return hmu_list, Cmu_list, E_list
 
 
 data = pd.DataFrame.from_csv(fname)
-
-data['flips'] = data['flips'].map(lambda x: list(x))
 data = data.reset_index()
 
-# data = data[data['type'] == '2D, 6x6x1 spins']
+# # data = data[data['type'] == '2D, 6x6x1 spins']
 # print data.shape
 # print data.head()
 
@@ -79,46 +83,74 @@ flip_list = list(data['flips'])
 
 hmu_samples = []
 Cmu_samples = []
-E_samples = []
+EE_samples = []
 
 for n, flip in enumerate(flip_list):
 
-    hmu, Cmu, E = sample_entropies(flip, n)
+    hmu, Cmu, EE = sample_entropies(flip, n, len(flip_list))
 
     hmu_samples += [hmu]
     Cmu_samples += [Cmu]
-    E_samples += [E]
+    EE_samples += [EE]
 
-hmu_average = [average(x) for x in hmu_samples]
-Cmu_average = [average(x) for x in Cmu_samples]
-E_average = [average(x) for x in E_samples]
+# print hmu_samples
+# print Cmu_samples
+# print EE_samples
 
-hmu_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in hmu_samples]
-Cmu_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in Cmu_samples]
-E_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in E_samples]
+nans_in_EE = [nan_count(x) for x in EE_samples]
+
+hmu_samples_clean = [drop_nans(x) for x in hmu_samples]
+Cmu_samples_clean = [drop_nans(x) for x in Cmu_samples]
+EE_samples_clean = [drop_nans(x) for x in EE_samples]
+
+hmu_average = [average(x) for x in hmu_samples_clean]
+Cmu_average = [average(x) for x in Cmu_samples_clean]
+EE_average = [average(x) for x in EE_samples_clean]
+
+hmu_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in hmu_samples_clean]
+Cmu_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in Cmu_samples_clean]
+EE_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in EE_samples_clean]
 
 hmu_low = [x[0] for x in hmu_CI]
 Cmu_low = [x[0] for x in Cmu_CI]
-E_low = [x[0] for x in E_CI]
+EE_low = [x[0] for x in EE_CI]
 
 hmu_high = [x[1] for x in hmu_CI]
 Cmu_high = [x[1] for x in Cmu_CI]
-E_high = [x[1] for x in E_CI]
+EE_high = [x[1] for x in EE_CI]
+
+hmu_err_low = np.subtract(hmu_average, hmu_low)
+Cmu_err_low = np.subtract(Cmu_average, Cmu_low)
+EE_err_low = np.subtract(EE_average, EE_low)
+
+hmu_err_high = np.subtract(hmu_high, hmu_average)
+Cmu_err_high = np.subtract(Cmu_high, Cmu_average)
+EE_err_high = np.subtract(EE_high, EE_average)
 
 data['hmu_samples'] = hmu_samples
 data['Cmu_samples'] = Cmu_samples
-data['E_samples'] = E_samples
+data['E_samples'] = EE_samples
 
 data['hmu_average'] = hmu_average
 data['Cmu_average'] = Cmu_average
-data['E_average'] = E_average
+data['EE_average'] = EE_average
+
+data['hmu_err_low'] = hmu_err_low
+data['Cmu_err_low'] = Cmu_err_low
+data['EE_err_low'] = EE_err_low
 
 data['hmu_low'] = hmu_low
 data['Cmu_low'] = Cmu_low
-data['E_low'] = E_low
+data['EE_low'] = EE_low
+
+data['hmu_err_high'] = hmu_err_high
+data['Cmu_err_high'] = Cmu_err_high
+data['EE_err_high'] = EE_err_high
 
 data['hmu_high'] = hmu_high
 data['Cmu_high'] = Cmu_high
-data['E_high'] = E_high
+data['E_high'] = EE_high
+
+data['nan_in_EE'] = nans_in_EE
 
 data.to_csv(fname[:-4] + ', processed.csv')

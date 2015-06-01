@@ -10,17 +10,20 @@ import math
 from random import randint
 from random import seed
 
-n1 = 12
-n2 = 12
+n1 = 4
+n2 = 4
 n3 = 1
 D = 2  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
 
 J = 1
 
-Tmin = 1.5
-Tmax = 3.0
+Tmin = 1.0
+Tmax = 4.0
 dT = 0.1
-T_list = list(np.arange(Tmin, Tmax + dT, dT)) + [1.5 * Tmax, 2 * Tmax, 4 * Tmax, 8 * Tmax, 16 * Tmax]
+
+large_T = range(1, 5) + [15, 20]
+
+T_list = list(np.arange(Tmin, Tmax + dT, dT)) + large_T
 
 
 size = n1 * n2 * n3
@@ -67,11 +70,13 @@ for T in T_list:
 
     E = []
     M = []
-    flip = []
+    flip = ''
 
     for step in range(steps_skip):
         i = randint(0, size - 1)    # spin to flip
         lattice.update(i, lattice.deltaE(i))
+
+    print 'T ' + str(T) + ' termalization done.'
 
     e = lattice.energy()
     m = lattice.magnetization()
@@ -88,7 +93,7 @@ for T in T_list:
 
         E += [e]
         M += [m]
-        flip += [f]
+        flip += str(f)
 
 
     assert(lattice.energy() == e)
@@ -103,8 +108,6 @@ for T in T_list:
 
     thermal_capacity = (np.var(E) / T**2) / size**2
     binder_cumulant = ( 1 - np.mean(M4) / (3 * np.mean(M2)**2) )
-
-    flip = ''.join(str(f) for f in flip)
 
     # fname = fname_base + ', T = ' + "%0.2f" % T + '.txt'
     #
@@ -125,7 +128,11 @@ for T in T_list:
     M_list += [magnetization]
     C_list += [thermal_capacity]
     B_list += [binder_cumulant]
-    flip_list += [flip[-10000 : ]]
+    flip_list += [flip]
+
+    print 'T ' + str(T) + ' done.'
+
+print 'Writing to file.'
 
 S_list = entropy(T_list, E_list)
 
