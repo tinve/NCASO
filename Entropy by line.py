@@ -25,16 +25,11 @@ def nan_count(a):
 def drop_nans(a):
     return [x for x in a if not np.isnan(x)]
 
-@timeout_decorator.timeout(3600)
-def sample_entropies(flip, sequence_number, total):
+def sample_entropies(posterior, sequence_number, total):
 
     # returns list of hmu, Cmu and E, sampled over the posterior
 
     num_samples = 5000
-
-    modelset = bayesem.LibraryGenerator(2, machine_states)
-    posterior = bayesem.ModelComparisonEM(modelset, flip, beta = 4.0, verbose = True)
-    print 'Posterior inferred.'
 
     hmu_list = []
     Cmu_list = []
@@ -65,7 +60,6 @@ def sample_entropies(flip, sequence_number, total):
             E = excess_entropy(machine)
         except timeout_decorator.timeout_decorator.TimeoutError:
             E = np.nan
-            print 'timeout'
 
         E_list += [E]
     #        print hmu, Cmu, E
@@ -90,13 +84,11 @@ EE_samples = []
 
 for n, flip in enumerate(flip_list):
 
-    try:
-        hmu, Cmu, EE = sample_entropies(flip, n, len(flip_list))
-    except timeout_decorator.timeout_decorator.TimeoutError:
-        hmu = [np.nan]
-        Cmu = [np.nan]
-        EE = [np.nan]
+    modelset = bayesem.LibraryGenerator(2, machine_states)
+    posterior = bayesem.ModelComparisonEM(modelset, flip, beta = 4.0, verbose = True)
+    print 'Posterior inferred.'
 
+    hmu, Cmu, EE = sample_entropies(posterior, n, len(flip_list))
 
     hmu_samples += [hmu]
     Cmu_samples += [Cmu]
