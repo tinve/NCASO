@@ -99,16 +99,14 @@ for n, flip in enumerate(flip_list):
 
 nans_in_EE = [nan_count(x) for x in EE_samples]
 
-hmu_samples_clean = [drop_nans(x) for x in hmu_samples]
-Cmu_samples_clean = [drop_nans(x) for x in Cmu_samples]
 EE_samples_clean = [drop_nans(x) for x in EE_samples]
 
-hmu_average = [average(x) for x in hmu_samples_clean]
-Cmu_average = [average(x) for x in Cmu_samples_clean]
+hmu_average = [average(x) for x in hmu_samples]
+Cmu_average = [average(x) for x in Cmu_samples]
 EE_average = [average(x) for x in EE_samples_clean]
 
-hmu_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in hmu_samples_clean]
-Cmu_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in Cmu_samples_clean]
+hmu_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in hmu_samples]
+Cmu_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in Cmu_samples]
 EE_CI = [mquantiles(x, prob=[0.025, 1.0 - 0.025], alphap = 1.0, betap = 1.0) for x in EE_samples_clean]
 
 hmu_low = [x[0] for x in hmu_CI]
