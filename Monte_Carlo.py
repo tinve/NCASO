@@ -5,11 +5,13 @@ import numpy as np
 import pandas as pd
 import matplotlib as plt
 import os.path
+import scipy.integrate
+import math
 from random import randint
 from random import seed
 
-n1 = 20
-n2 = 20
+n1 = 12
+n2 = 12
 n3 = 1
 D = 2  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
 
@@ -18,6 +20,8 @@ J = 1
 Tmin = 1.5
 Tmax = 3.0
 dT = 0.1
+T_list = list(np.arange(Tmin, Tmax + dT, dT)) + [1.5 * Tmax, 2 * Tmax, 4 * Tmax, 8 * Tmax, 16 * Tmax]
+
 
 size = n1 * n2 * n3
 
@@ -31,14 +35,33 @@ assert((D == 1   and n2 == 1 and n3 == 1) or
 
 # fname_base = str(D) + 'D, ' + str(n1) + 'x' + str(n2) + 'x' + str(n3) + ' spins'
 
-T_list = []
 E_list = []
 M_list = []
 C_list = []
+S_list = []
 B_list = []
 flip_list = []
 
-for T in np.arange(Tmin, Tmax + dT, dT):
+
+def entropy(T_list, E_list):
+    '''
+    returns entropy for given temperature list (T_list) and energy list (E_list) for Ising model.
+    Normalized to go to 0 at T = 0
+    '''
+    beta_list = [1 / T for T in T_list]
+    S = []
+
+    for i in xrange(len(E_list)):
+        S += [ E_list[i] / T_list[i] + scipy.integrate.trapz(E_list[i:], beta_list[i:]) ]
+
+
+    S = [s - S[-1]  + math.log(2) for s in S]
+    S = [s / S[-1] for s in S]
+
+    return S
+
+
+for T in T_list:
 
     lattice = Lattice_class.Lattice(n1, n2, n3, D, J, T)
 
@@ -71,7 +94,6 @@ for T in np.arange(Tmin, Tmax + dT, dT):
     assert(lattice.energy() == e)
     assert(lattice.magnetization() == m)
 
-    temperature = T
 
     M2 = list(np.array(M)**2)
     M4 = list(np.array(M)**4)
@@ -99,12 +121,13 @@ for T in np.arange(Tmin, Tmax + dT, dT):
     #
     # f.close()
 
-    T_list += [T]
     E_list += [energy]
     M_list += [magnetization]
     C_list += [thermal_capacity]
     B_list += [binder_cumulant]
     flip_list += [flip[-10000 : ]]
+
+S_list = entropy(T_list, E_list)
 
 lattice_type = [str(D) + 'D, ' + str(n1) + 'x' + str(n2) + 'x' + str(n3) + ' spins']*len(T_list)
 
@@ -113,6 +136,7 @@ records = pd.DataFrame({'type'  : lattice_type,
                         'E'     : E_list,
                         'M'     : M_list,
                         'C'     : C_list,
+                        'S'     : S_list,
                         'B'     : B_list,
                         'flips' : flip_list})
 
