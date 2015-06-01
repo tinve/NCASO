@@ -12,8 +12,8 @@ from random import seed
 
 n1 = 4
 n2 = 4
-n3 = 1
-D = 2  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
+n3 = 2
+D = 2.5  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
 
 J = 1
 
