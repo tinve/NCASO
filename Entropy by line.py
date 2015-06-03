@@ -7,13 +7,12 @@ import cmpy.inference.bayesianem as bayesem
 from numpy import average
 from scipy.stats.mstats import mquantiles
 from random import seed
-import datetime
-from eventlet.timeout import Timeout
+import subprocess
 import timeout_decorator
 
-fname = '2D, T from 1.0 to 4.0.csv'
+fname = '2D, 4x4x1 spins, T from 1.0 to 4.0.csv'
 machine_states = [1, 2, 3, 4]
-
+T = 3.9
 
 @timeout_decorator.timeout(10)
 def excess_entropy(machine):
@@ -72,11 +71,16 @@ def sample_entropies(posterior, sequence_number, total):
 data = pd.DataFrame.from_csv(fname)
 data = data.reset_index()
 
-# # data = data[data['type'] == '2D, 6x6x1 spins']
-# print data.shape
-# print data.head()
+print data.shape
+print data.head()
+
+data = data[abs(data['T']- T) < 1e-10]
+
+print data.shape
+print data.head()
 
 flip_list = list(data['flips'])
+# print flip_list
 
 hmu_samples = []
 Cmu_samples = []
@@ -94,9 +98,9 @@ for n, flip in enumerate(flip_list):
     Cmu_samples += [Cmu]
     EE_samples += [EE]
 
-# print hmu_samples
-# print Cmu_samples
-# print EE_samples
+print hmu_samples
+print Cmu_samples
+print EE_samples
 
 nans_in_EE = [nan_count(x) for x in EE_samples]
 
@@ -152,4 +156,7 @@ data['E_high'] = EE_high
 
 data['nan_in_EE'] = nans_in_EE
 
-data.to_csv(fname[:-4] + ', processed.csv')
+data.to_csv(fname[:-4] + ', processed for T = ' + str(T) + '.csv')
+
+# subprocess.call(['speech-dispatcher'])        #start speech dispatcher
+subprocess.call(['spd-say', '"finished"'])

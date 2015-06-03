@@ -1,4 +1,4 @@
-__author__ = 'galina'
+from __future__ import division
 
 import Lattice_class
 import numpy as np
@@ -10,10 +10,34 @@ import math
 from random import randint
 from random import seed
 
-n1 = 4
-n2 = 4
-n3 = 2
-D = 2.5  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
+def entropy_func(T_list, E_list):
+    '''
+    returns entropy for given temperature list (T_list) and energy list (E_list) for Ising model.
+    Normalized to go to 0 at T = 0
+    '''
+    beta_list = [1 / x for x in T_list]
+    print 'inside entropy function'
+    print T_list
+    print beta_list
+
+    S = []
+
+    for i in range(len(E_list)):
+        S += [ E_list[i] * beta_list[i] + scipy.integrate.trapz(E_list[i:], beta_list[i:]) ]
+        print i, T_list[i], E_list[i], S[i], beta_list[i]
+
+    print S
+    S = [s - S[-1]  + math.log(2) for s in S]
+    print S
+    S = [s / S[-1] for s in S]
+    print S
+
+    return S
+
+n1 = 6
+n2 = 1
+n3 = 1
+D = 1  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
 
 J = 1
 
@@ -21,22 +45,26 @@ Tmin = 1.0
 Tmax = 4.0
 dT = 0.1
 
-large_T = range(1, 5) + [15, 20]
+large_T = range(5, 11) + [15, 20]
 
 T_list = list(np.arange(Tmin, Tmax + dT, dT)) + large_T
-
+# T_list = [2.2]
 
 size = n1 * n2 * n3
 
-steps_skip = 500 * size
-steps_measure = 1000 * size
+steps_skip = 5000 * size
+steps_measure = 10000 * size
 
 assert((D == 1   and n2 == 1 and n3 == 1) or
        (D == 1.5 and n2 == 2 and n3 == 1) or
        (D == 2   and n3 == 1) or
        (D == 2.5 and n3 == 2))
 
-# fname_base = str(D) + 'D, ' + str(n1) + 'x' + str(n2) + 'x' + str(n3) + ' spins'
+#fname = str(D) + 'D, ' + str(n1) + 'x' + str(n2) + 'x' + str(n3) + ' spins, T from ' + str(Tmin) + ' to ' + str(Tmax) + '.csv'
+#if os.path.exists(fname):
+#    raise ValueError('File already exists')
+
+fname = str(D) + 'D, T from ' + str(Tmin) + ' to ' + str(Tmax) + '.csv'
 
 E_list = []
 M_list = []
@@ -44,25 +72,6 @@ C_list = []
 S_list = []
 B_list = []
 flip_list = []
-
-
-def entropy(T_list, E_list):
-    '''
-    returns entropy for given temperature list (T_list) and energy list (E_list) for Ising model.
-    Normalized to go to 0 at T = 0
-    '''
-    beta_list = [1 / T for T in T_list]
-    S = []
-
-    for i in xrange(len(E_list)):
-        S += [ E_list[i] / T_list[i] + scipy.integrate.trapz(E_list[i:], beta_list[i:]) ]
-
-
-    S = [s - S[-1]  + math.log(2) for s in S]
-    S = [s / S[-1] for s in S]
-
-    return S
-
 
 for T in T_list:
 
@@ -109,21 +118,6 @@ for T in T_list:
     thermal_capacity = (np.var(E) / T**2) / size**2
     binder_cumulant = ( 1 - np.mean(M4) / (3 * np.mean(M2)**2) )
 
-    # fname = fname_base + ', T = ' + "%0.2f" % T + '.txt'
-    #
-    # if os.path.exists(fname):
-    #     print 'File already exist'
-    #
-    # f = open(fname, 'w')
-    # f.write('T ' + str(temperature) + '\n' +
-    #         'E ' + str(energy) + '\n' +
-    #         'M ' + str(magnetization) + '\n' +
-    #         'C ' + str(thermal_capacity) + '\n' +
-    #         'B ' + str(binder_cumulant) + '\n' +
-    #         'flips ' + flip)
-    #
-    # f.close()
-
     E_list += [energy]
     M_list += [magnetization]
     C_list += [thermal_capacity]
@@ -133,8 +127,23 @@ for T in T_list:
     print 'T ' + str(T) + ' done.'
 
 print 'Writing to file.'
+print T_list
+print E_list
 
-S_list = entropy(T_list, E_list)
+S_list = entropy_func(T_list, E_list)
+
+# beta_list = [1 / x for x in T_list]
+# S_list = []
+#
+# for i in range(len(T_list)):
+#    S_list += [ (E_list[i] / T_list[i]) + scipy.integrate.trapz(E_list[i:], beta_list[i:]) ]
+#
+# S_list = [s - S_list[-1] + math.log(2) for s in S_list]
+# S_list = [s / S_list[-1] for s in S_list]
+
+for i in range(len(T_list)):
+    print T_list[i], E_list[i], S_list[i]
+print S_list
 
 lattice_type = [str(D) + 'D, ' + str(n1) + 'x' + str(n2) + 'x' + str(n3) + ' spins']*len(T_list)
 
@@ -147,10 +156,9 @@ records = pd.DataFrame({'type'  : lattice_type,
                         'B'     : B_list,
                         'flips' : flip_list})
 
-fname = str(D) + 'D, T from ' + str(Tmin) + ' to ' + str(Tmax) + '.csv'
+# records.to_csv(fname)
 
-if not os.path.exists(fname):
-#     print 'File already exist'
-    records.to_csv(fname)
+if os.path.exists(fname):
+    records.to_csv(fname, 'a', header = False)
 else:
-    records.to_csv(fname, mode = 'a', header = False)
+    records.to_csv(fname)
