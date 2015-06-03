@@ -2,10 +2,11 @@ from __future__ import division
 import os
 import pandas as pd
 
-folder = '2D, 4x4x1 spins,  4 states library'
+folder = 'temp'
 
 ls = os.listdir(folder)
 fname = ls[0][ :-16]
+print fname
 
 ls = [folder + '/' + x for x in ls]
 

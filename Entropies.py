@@ -11,7 +11,7 @@ import datetime
 from eventlet.timeout import Timeout
 import timeout_decorator
 
-fname = '2.5D, 8x8x2 spins, T from 1.0 to 4.0.csv'
+fname = '1D, T from 0.2 to 3.0.csv'
 machine_states = [1, 2, 3, 4]
 
 
@@ -37,7 +37,7 @@ def sample_entropies(flip, sequence_number, total):
 
     hmu_list = []
     Cmu_list = []
-    E_list = []
+    EE_list = []
 
     for n in range(num_samples):
 
@@ -61,17 +61,17 @@ def sample_entropies(flip, sequence_number, total):
         #     print 'pass'
         #     E_list += [E]
         try:
-            E = excess_entropy(machine)
+            EE = excess_entropy(machine)
         except timeout_decorator.timeout_decorator.TimeoutError:
-            E = np.nan
+            EE = np.nan
             print 'timeout'
 
-        E_list += [E]
+        EE_list += [EE]
     #        print hmu, Cmu, E
 
         print 'sequence ' + str(sequence_number) + ' of ' + str(total) + ', sample ' + str(n)
 
-    return hmu_list, Cmu_list, E_list
+    return hmu_list, Cmu_list, EE_list
 
 
 data = pd.DataFrame.from_csv(fname)
@@ -129,7 +129,7 @@ EE_err_high = np.subtract(EE_high, EE_average)
 
 data['hmu_samples'] = hmu_samples
 data['Cmu_samples'] = Cmu_samples
-data['E_samples'] = EE_samples
+data['EE_samples'] = EE_samples
 
 data['hmu_average'] = hmu_average
 data['Cmu_average'] = Cmu_average
@@ -149,7 +149,7 @@ data['EE_err_high'] = EE_err_high
 
 data['hmu_high'] = hmu_high
 data['Cmu_high'] = Cmu_high
-data['E_high'] = EE_high
+data['EE_high'] = EE_high
 
 data['nan_in_EE'] = nans_in_EE
 

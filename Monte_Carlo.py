@@ -34,10 +34,10 @@ def entropy_func(T_list, E_list):
 
     return S
 
-n1 = 6
-n2 = 1
-n3 = 1
-D = 1  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
+n1 = 10
+n2 = 10
+n3 = 2
+D = 2.5  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
 
 J = 1
 
@@ -45,9 +45,10 @@ Tmin = 1.0
 Tmax = 4.0
 dT = 0.1
 
-large_T = range(5, 11) + [15, 20]
+large_T = range(4, 11) + [15, 20]
 
 T_list = list(np.arange(Tmin, Tmax + dT, dT)) + large_T
+T_list = [float(t) for t in T_list]
 # T_list = [2.2]
 
 size = n1 * n2 * n3
@@ -159,6 +160,6 @@ records = pd.DataFrame({'type'  : lattice_type,
 # records.to_csv(fname)
 
 if os.path.exists(fname):
-    records.to_csv(fname, 'a', header = False)
+    records.to_csv(fname, mode = 'a', header = False)
 else:
     records.to_csv(fname)
