@@ -11,9 +11,9 @@ import datetime
 from eventlet.timeout import Timeout
 import timeout_decorator
 
-fname = '2D, T from 1.0 to 4.0.csv'
+fname = '2.5D, T from 1.0 to 4.0.csv'
 machine_states = [1, 2, 3, 4]
-type = '2D, 8x8x1 spins'
+type = '2.5D, 8x8x2 spins'
 
 
 def sample_entropies(flip, sequence_number, total):
@@ -39,7 +39,7 @@ def sample_entropies(flip, sequence_number, total):
         hmu_list += [hmu]
         Cmu_list += [Cmu]
 
-        print 'sequence ' + str(sequence_number) + ' of ' + str(total) + ', sample ' + str(n)
+        print 'sequence ' + str(sequence_number + 1) + ' of ' + str(total) + ', sample ' + str(n)
 
     return hmu_list, Cmu_list
 
@@ -48,7 +48,7 @@ data = pd.DataFrame.from_csv(fname)
 data = data.reset_index()
 
 data = data[data['type'] == type]
-data = data[data['T'] > 2.5 - 0.0001]
+data = data[data['T'] > 2.0 - 0.0001]
 print data.shape
 print data.head()
 

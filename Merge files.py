@@ -2,7 +2,7 @@ from __future__ import division
 import os
 import pandas as pd
 
-folder = 'temp'
+folder = 'temp for 2.5D'
 
 ls = os.listdir(folder)
 fname = ls[0][ :-16]
@@ -12,5 +12,8 @@ ls = [folder + '/' + x for x in ls]
 
 data = pd.concat([pd.DataFrame.from_csv(x) for x in ls])
 data.sort('T', inplace = True)
+# data = data.reset_index()
 
+print data.shape
+print data.info()
 data.to_csv(fname + '.csv')

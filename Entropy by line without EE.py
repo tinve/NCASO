@@ -10,10 +10,10 @@ from random import seed
 import subprocess
 import timeout_decorator
 
-fname = '1.5D, T from 0.2 to 3.0.csv'
+fname = '2.5D, T from 1.0 to 4.0.csv'
 machine_states = [1, 2, 3, 4]
-T = 0.3
-type = '1.5D, 12x2x1 spins'
+T = 1.0
+type = '2.5D, 8x8x2 spins'
 
 @timeout_decorator.timeout(10)
 def excess_entropy(machine):
