@@ -11,8 +11,8 @@ import subprocess
 import timeout_decorator
 
 fname = '1D, T from 0.2 to 3.0.csv'
-machine_states = [1, 2, 3, 4]
-T = 0.9
+machine_states = [1, 2, 3]
+T = 3.0
 
 @timeout_decorator.timeout(10)
 def excess_entropy(machine):
@@ -77,7 +77,8 @@ EE_samples = []
 
 for n, flip in enumerate(flip_list):
 
-    modelset = bayesem.LibraryGenerator(2, machine_states)
+#    modelset = bayesem.LibraryGenerator(2, machine_states)
+    modelset = bayesem.LibraryGenerator(2, machine_states, em_min='none')
     posterior = bayesem.ModelComparisonEM(modelset, flip, beta = 4.0, verbose = True)
     print 'Posterior inferred.'
 

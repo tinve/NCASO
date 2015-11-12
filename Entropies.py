@@ -31,7 +31,8 @@ def sample_entropies(flip, sequence_number, total):
 
     num_samples = 1000
 
-    modelset = bayesem.LibraryGenerator(2, machine_states)
+#    modelset = bayesem.LibraryGenerator(2, machine_states)
+    modelset = bayesem.LibraryGenerator(2, machine_states, em_min='none')
     posterior = bayesem.ModelComparisonEM(modelset, flip, beta = 4.0, verbose = True)
     print 'Posterior inferred.'
 

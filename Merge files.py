@@ -2,7 +2,7 @@ from __future__ import division
 import os
 import pandas as pd
 
-folder = 'temp for 2.5D'
+folder = 'temp'
 
 ls = os.listdir(folder)
 fname = ls[0][ :-16]
@@ -16,4 +16,6 @@ data.sort('T', inplace = True)
 
 print data.shape
 print data.info()
-data.to_csv(fname + '.csv')
+# data.to_csv(fname + '.csv')
+
+# data.to_csv('no flips, all lattices.csv')

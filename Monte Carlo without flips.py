@@ -10,6 +10,7 @@ import scipy.stats
 import math
 from random import randint
 from random import seed
+import subprocess
 
 def entropy_func(T_list, E_list):
     '''
@@ -28,20 +29,20 @@ def entropy_func(T_list, E_list):
     return S
 
 # 1D and 1.5D: 6, 8, 10, 12, 20, 40
-# 2D and 2.5D: 4, 6, 8, 10
+# 2D and 2.5D: 4, 6, 8, 10, (12)
 
-n1 = 4
-n2 = 4
-n3 = 2
-D = 2.5  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
+n1 = 12
+n2 = 12
+n3 = 1
+D = 2  # can be 1, 1.5 (ladder), 2 or 2.5 (bilayer)
 
 J = 1
 
-Tmin = 1.0
+Tmin = 0.2
 Tmax = 4.0
 dT = 0.1
 
-large_T = range(4, 11) + [15, 20]
+large_T = range(5, 11) + [15, 20]
 
 T_list = list(np.arange(Tmin, Tmax + dT, dT)) + large_T
 T_list = [float(t) for t in T_list]
@@ -61,7 +62,7 @@ assert((D == 1   and n2 == 1 and n3 == 1) or
 #if os.path.exists(fname):
 #    raise ValueError('File already exists')
 
-fname = str(D) + 'D, T from ' + str(Tmin) + ' to ' + str(Tmax) + ', no flips.csv'
+fname = 'no flips, ' + str(D) + 'D, T from ' + str(Tmin) + ' to ' + str(Tmax) + '.csv'
 
 E_list = []
 M_list = []
@@ -157,3 +158,8 @@ if os.path.exists(fname):
     records.to_csv(fname, mode = 'a', header = False)
 else:
     records.to_csv(fname)
+
+print fname + ' for ' + str(n1) + 'x' + str(n2) + 'x' + str(n3) + ' spins'
+
+# subprocess.call(['speech-dispatcher'])        #start speech dispatcher
+subprocess.call(['spd-say', '"finished"'])
